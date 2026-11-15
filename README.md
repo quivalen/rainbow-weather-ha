@@ -19,6 +19,7 @@ This repository is not included in the default HACS catalog. Requires Home Assis
 - Precipitation rate (mm/h) and type for the current forecast minute.
 - Next precipitation start (unknown when already precipitating or none is predicted).
 - Current precipitation end (unknown when dry, or the episode extends beyond the forecast).
+- Next precipitation end (end of the next episode, or the current episode when already precipitating; unknown if none is predicted or the end is beyond the forecast).
 - Forecast precipitation total (mm) and peak rate (mm/h) over the remaining forecast.
 - Forecast summary with a `forecast` attribute containing UTC time, rate and type for every remaining minute.
 - Forecast fetched diagnostic timestamp (retrieval time, **not** model issue time).

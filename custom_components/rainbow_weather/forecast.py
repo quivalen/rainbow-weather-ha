@@ -27,3 +27,14 @@ def episode_end(data, now):
             return following["timestampBegin"]
     # The episode extends beyond the forecast: its end is unknown.
     return None
+
+
+def next_episode_end(data, now):
+    """End of the first remaining wet episode, not the last wet minute."""
+    started = False
+    for item in remaining(data, now):
+        if item["precipRate"] > 0:
+            started = True
+        elif started:
+            return item["timestampBegin"]
+    return None

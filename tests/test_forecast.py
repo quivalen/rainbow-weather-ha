@@ -38,3 +38,25 @@ class ForecastTest(unittest.TestCase):
 
     def test_empty(self):
         self.assertIsNone(forecast.current({}, 0))
+
+    def test_next_episode_end_while_dry(self):
+        self.assertEqual(forecast.next_episode_end(self.data, 0), 120)
+
+    def test_next_episode_end_while_wet(self):
+        self.assertEqual(forecast.next_episode_end(self.data, 90), 120)
+
+    def test_next_episode_end_open_ended(self):
+        self.data["forecast"].pop()
+        self.assertIsNone(forecast.next_episode_end(self.data, 0))
+
+    def test_next_episode_end_no_rain(self):
+        self.assertIsNone(forecast.next_episode_end(self.data, 120))
+        self.assertIsNone(forecast.next_episode_end({}, 0))
+
+    def test_next_episode_end_first_of_multiple(self):
+        self.data["forecast"].extend([
+            {"timestampBegin": 180, "timestampEnd": 240, "precipRate": 6},
+            {"timestampBegin": 240, "timestampEnd": 300, "precipRate": 0},
+        ])
+        self.assertEqual(forecast.next_episode_end(self.data, 0), 120)
+        self.assertEqual(forecast.next_episode_end(self.data, 150), 240)

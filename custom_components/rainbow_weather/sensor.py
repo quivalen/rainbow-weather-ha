@@ -7,7 +7,7 @@ from homeassistant.helpers.entity import EntityCategory
 
 from .const import DOMAIN
 from .entity import RainbowEntity
-from .forecast import current, remaining, wet, total, episode_end
+from .forecast import current, remaining, wet, total, episode_end, next_episode_end
 
 
 SENSORS = {
@@ -15,6 +15,7 @@ SENSORS = {
     "type": ("Precipitation type", None),
     "start": ("Next precipitation start", None),
     "end": ("Current precipitation end", None),
+    "next_end": ("Next precipitation end", None),
     "total": ("Forecast precipitation total", UnitOfPrecipitationDepth.MILLIMETERS),
     "peak": ("Peak precipitation rate", UnitOfVolumetricFlux.MILLIMETERS_PER_HOUR),
     "summary": ("Forecast summary", None),
@@ -35,7 +36,7 @@ class RainbowSensor(RainbowEntity, SensorEntity):
         super().__init__(coordinator, entry, key, name)
         self.key = key
         self._attr_native_unit_of_measurement = unit
-        if key in {"start", "end", "fetched"}:
+        if key in {"start", "end", "next_end", "fetched"}:
             self._attr_device_class = SensorDeviceClass.TIMESTAMP
         if unit:
             self._attr_state_class = SensorStateClass.MEASUREMENT
@@ -67,6 +68,8 @@ class RainbowSensor(RainbowEntity, SensorEntity):
             stamp = upcoming[0]["timestampBegin"] if upcoming else None
         if self.key == "end":
             stamp = episode_end(data, now)
+        if self.key == "next_end":
+            stamp = next_episode_end(data, now)
         return datetime.fromtimestamp(stamp, timezone.utc) if stamp is not None else None
 
     @property
