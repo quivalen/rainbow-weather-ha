@@ -1,0 +1,22 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to Rainbow Weather",
+        "description": "Enter your Rainbow API key and the coordinates to monitor.",
+        "data": {
+          "api_key": "API key",
+          "latitude": "Latitude",
+          "longitude": "Longitude"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not connect or validate the API key. Check the key, coordinates, and API access.",
+      "unknown": "Unexpected error. Check the Home Assistant logs."
+    },
+    "abort": {
+      "already_configured": "This location is already configured."
+    }
+  }
+}

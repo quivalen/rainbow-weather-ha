@@ -1,0 +1,11 @@
+{
+  "domain": "rainbow_weather",
+  "name": "Rainbow Weather",
+  "codeowners": ["@quivalen"],
+  "config_flow": true,
+  "documentation": "https://github.com/quivalen/rainbow-weather-ha",
+  "issue_tracker": "https://github.com/quivalen/rainbow-weather-ha/issues",
+  "iot_class": "cloud_polling",
+  "requirements": [],
+  "version": "0.1.0"
+}
