@@ -54,6 +54,6 @@ python3 -m unittest discover -s tests -v
 python3 -m compileall -q custom_components
 ```
 
-Pure forecast calculations have offline unit tests. `validation/validate.yml.example` is a GitHub Actions template for tests, Hassfest, and HACS validation. To enable it, copy it to `.github/workflows/validate.yml` using a token with workflow permissions. These validations have not yet run. A running Home Assistant instance is still required for end-to-end verification.
+Pure forecast calculations have offline unit tests. GitHub Actions runs tests, Hassfest, and HACS validation through `.github/workflows/validate.yml`. A running Home Assistant instance is still required for end-to-end verification.
 
 Data by [Rainbow Weather](https://rainbow.ai/). API documentation: https://doc.rainbow.ai/api-ref/nowcast/ . This project is not affiliated with Rainbow Weather.
