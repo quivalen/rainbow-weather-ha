@@ -6,6 +6,21 @@ on:
 permissions:
   contents: read
 jobs:
+  imports:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+      - run: pip install homeassistant
+      - name: Import integration and every platform against Home Assistant
+        run: |
+          python - <<'PY'
+          import importlib
+          for module in ('config_flow', 'sensor', 'binary_sensor', 'button'):
+              importlib.import_module(f'custom_components.rainbow_weather.{module}')
+          PY
   tests:
     runs-on: ubuntu-latest
     steps:

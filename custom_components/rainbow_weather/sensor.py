@@ -2,7 +2,7 @@
 from datetime import datetime, timezone
 
 from homeassistant.components.sensor import SensorEntity, SensorDeviceClass, SensorStateClass
-from homeassistant.const import UnitOfPrecipitationDepth, UnitOfPrecipitationRate
+from homeassistant.const import UnitOfPrecipitationDepth, UnitOfVolumetricFlux
 from homeassistant.helpers.entity import EntityCategory
 
 from .const import DOMAIN
@@ -11,12 +11,12 @@ from .forecast import current, remaining, wet, total, episode_end
 
 
 SENSORS = {
-    "rate": ("Precipitation rate", UnitOfPrecipitationRate.MILLIMETERS_PER_HOUR),
+    "rate": ("Precipitation rate", UnitOfVolumetricFlux.MILLIMETERS_PER_HOUR),
     "type": ("Precipitation type", None),
     "start": ("Next precipitation start", None),
     "end": ("Current precipitation end", None),
     "total": ("Forecast precipitation total", UnitOfPrecipitationDepth.MILLIMETERS),
-    "peak": ("Peak precipitation rate", UnitOfPrecipitationRate.MILLIMETERS_PER_HOUR),
+    "peak": ("Peak precipitation rate", UnitOfVolumetricFlux.MILLIMETERS_PER_HOUR),
     "summary": ("Forecast summary", None),
     "fetched": ("Forecast fetched", None),
 }
